@@ -2,6 +2,7 @@ name: rpDice
 version: '${version}'
 main: net.lordofthetimes.rpDice.RpDice
 api-version: '1.21'
+author: LordofTheTimes
 dependencies:
   server:
     CommandAPI:

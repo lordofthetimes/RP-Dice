@@ -30,8 +30,8 @@ public class UpdateChecker {
     public void getInfo() {
         try{
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.modrinth.com/v2/project/character-cards/version"))
-                    .header("User-Agent", "lordofthetimes/CharacterCards" + version + " (lordofthetimes100@gmail.com)")
+                    .uri(URI.create("https://api.modrinth.com/v2/project/rp-dice/version"))
+                    .header("User-Agent", "lordofthetimes/RP Dice" + version + " (lordofthetimes100@gmail.com)")
                     .GET()
                     .build();;
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
@@ -58,10 +58,10 @@ public class UpdateChecker {
     public void sendVersionConsole(){
         if(!config.getBoolean("checkForUpdate")) return;
         if(isNotLatest(version,latestVersion)){
-            plugin.logger.logInfo("Current version of Character Cards is not the latest!");
+            plugin.logger.logInfo("Current version of RP Dice is not the latest!");
             plugin.logger.logInfo("Running version " + version + " when latest version is " + latestVersion + "!");
             plugin.logger.logInfo("Changelog : " + changelog.replaceAll("\\[[^\\]]*\\]\\(([^\\)]+)\\)", "$1"));
-            plugin.logger.logInfo("Download the latest version here : https://modrinth.com/plugin/character-cards/version/" + latestVersion);
+            plugin.logger.logInfo("Download the latest version here : https://modrinth.com/plugin/rp-dice/version/" + latestVersion);
         }
         else{
             plugin.logger.logInfo("Currently running the latest version " + version);
@@ -70,12 +70,12 @@ public class UpdateChecker {
     public void sendVersionPlayer(Player player){
         if(!config.getBoolean("checkForUpdate")) return;
         if(version.contains("experimental")){
-            MessageSender.sendMessage(player,"<red><bold>This version of Character Cards is experimental! Please manually check for updates!</bold></red>");
+            MessageSender.sendMessage(player,"<red><bold>This version of RP Dice is experimental! Please manually check for updates!</bold></red>");
             MessageSender.sendMessage(player,"<yellow>Running version<red><bold> " + version + "</bold></red>");
             return;
         }
         if(isNotLatest(version,latestVersion)){
-            MessageSender.sendMessage(player,"<red><bold>Current version of Character Cards is not the latest!</bold></red>");
+            MessageSender.sendMessage(player,"<red><bold>Current version of RP Dice is not the latest!</bold></red>");
             MessageSender.sendMessage(player,"<yellow>Running version<red><bold> " + version + "</bold></red> when latest version is<green><bold> " + latestVersion + "</bold></green></yellow>");
             MessageSender.sendMessage(player,"<aqua>Changelog:</aqua> " + changelog.replaceAll(
                     "\\[([^]]+)\\]\\(([^\\)]+)\\)",
@@ -83,7 +83,7 @@ public class UpdateChecker {
             ));
             MessageSender.sendMessage(player,
                     "<green>Download the latest version here: </green>" +
-                            "<click:open_url:'https://modrinth.com/plugin/character-cards/version/" + latestVersion + "'>" +
+                            "<click:open_url:'https://modrinth.com/plugin/rp-dice/version/" + latestVersion + "'>" +
                             "<underlined><blue>Modrinth</blue></underlined>" +
                             "</click>"
             );

@@ -1,4 +1,51 @@
+#####################################################
+#                                                   #
+#                  RP DICE CONFIG                   #
+#                                                   #
+#####################################################
 
+# This decides if plugin will check for new versions on reload or server start [default - true]
+checkForUpdate: true
+
+# Per player cooldown in ms for all commands to prevent command spam lagging the server [default - 1000] (1s)
+commandCooldown: 1000
+
+# Message showing result of the roll. Placeholders:
+# <%username%> - players name
+# <%diceName%> - dice name (e.g. 3d4)
+# <%rollList%> - individual rolls (e.g. '1, 2, 4, 3, ')
+# <%total%> - total value of rolled dice (e.g. 10)
+# Also supports papi placeholders.
+resultMessage: "<green><%username%> rolls <%diceName%>! Result is <%rollList%> !\nThey rolled <%total%> !</green>"
+
+# Within what distance from executor Players should see the result of the roll? [default - 20]
+resultDistance: 20
+
+# Allow for custom dice rolls [default - true]
+allowCustomRoll: true
+
+# Max amount of dices for custom roll
+customMaxDice: 10
+
+# Max amount that can be rolled for custom roll
+customMax: 100
+
+# Example preset dices
+dices:
+  1d6:
+    dices: 1
+    min: 1
+    max: 6
+
+  3d4:
+    dices: 3
+    min: 1
+    max: 4
+
+  example-dice: #command name (e.g /roll example-dice)
+    dices: 4 # Times to roll
+    min: 1 # Minimum roll possible
+    max: 7 # Maximum roll possible
 
 # DO NOT CHANGE VERSION - ESSENTIAL FOR CONFIG UPDATES
 config-version: 1
