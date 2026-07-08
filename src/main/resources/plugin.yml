@@ -1,0 +1,10 @@
+name: rpDice
+version: '${version}'
+main: net.lordofthetimes.rpDice.RpDice
+api-version: '1.21'
+dependencies:
+  server:
+    CommandAPI:
+      load: BEFORE
+      required: true
+      join-classpath: true
