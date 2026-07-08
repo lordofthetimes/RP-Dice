@@ -10,6 +10,7 @@ import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIPaperConfig;
 import net.lordofthetimes.rpDice.commands.RollCommand;
 import net.lordofthetimes.rpDice.commands.RpDiceCommand;
+import net.lordofthetimes.rpDice.hooks.bstats.Metrics;
 import net.lordofthetimes.rpDice.listeners.PlayerJoinListener;
 import net.lordofthetimes.rpDice.utils.CommandCooldown;
 import net.lordofthetimes.rpDice.utils.LogHelper;
@@ -83,6 +84,9 @@ public final class RpDice extends JavaPlugin {
 
         playerJoinListener = new PlayerJoinListener(this);
         getServer().getPluginManager().registerEvents(playerJoinListener,this);
+
+        int pluginId = 32488;
+        Metrics metrics = new Metrics(this, pluginId);
 
     }
 
