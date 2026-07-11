@@ -1,0 +1,3 @@
+- fixed issue with plugin not checking for Placeholder API properly
+- added bstats metrics
+- added messages.yml - contains all plugin messages, easily replaceable with custom ones!

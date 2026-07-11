@@ -3,7 +3,6 @@ package net.lordofthetimes.rpDice.commands;
 import dev.dejvokep.boostedyaml.YamlDocument;
 import dev.dejvokep.boostedyaml.block.implementation.Section;
 import dev.jorel.commandapi.CommandAPICommand;
-import dev.jorel.commandapi.arguments.GreedyStringArgument;
 import dev.jorel.commandapi.arguments.StringArgument;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -14,19 +13,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class RollCommand {
 
     private final YamlDocument config;
     private final CommandCooldown cooldown;
+    private final MessageSender msg;
     private final RpDice plugin;
 
     public RollCommand(RpDice plugin){
         this.config = plugin.config;
         this.cooldown = plugin.cooldown;
+        this.msg = plugin.msg;
         this.plugin = plugin;
 
         CommandAPICommand rollCommand = new CommandAPICommand("roll")
@@ -62,7 +61,7 @@ public class RollCommand {
     private void rollCustom(CommandSender sender, String name){
 
         if(!name.matches("^\\d+d\\d+$")){
-            MessageSender.sendMessage(sender,"<red>Wrong format. Correct format is <number>d<number> e.g. 1d20, 3d4, 12d2");
+            msg.sendMessage(sender,"msg-roll-wrong-format");
             return;
         }
 
@@ -77,8 +76,11 @@ public class RollCommand {
         int diceLimit = config.getInt("customMaxDice");
         int maxLimit = config.getInt("customMax");
 
+
         if(dices > diceLimit || max > maxLimit){
-            MessageSender.sendMessage(sender,"<red>Over the limit. Maximum amount of dices is " + diceLimit + " and maximum roll is " + maxLimit + " !</red>");
+            msg.sendMessage(sender,"msg-custom-limit",
+                    Map.of("<%diceLimit%>" , String.valueOf(diceLimit) ,
+                            "<%maxLimit%>", String.valueOf(maxLimit)));
             return;
         }
 
@@ -88,7 +90,7 @@ public class RollCommand {
     private void roll(CommandSender sender, int dices, int min, int max, String name){
 
         if(!(sender instanceof Player player)){
-            MessageSender.sendMessage(sender,"<yellow>This command can only be used by a player!</yellow>");
+            msg.sendMessage(sender,"msg-only-player");
             return;
         }
 
@@ -146,14 +148,11 @@ public class RollCommand {
     private void help(CommandSender sender){
 
         if(!(sender instanceof Player player)){
-            MessageSender.sendMessage(sender,"<yellow>This command can only be used by a player!</yellow>");
+            msg.sendMessage(sender,"msg-only-player");
             return;
         }
 
-        String message = "<yellow>USAGE: \n/" +
-                "roll <preset-dice> - rolls a preset dice from the config\n" +
-                "/roll custom <diceName> - rolls custom dice. Format : <number>d<number> e.g. 1d20, 3d4, 12d2";
-        MessageSender.sendMessage(player,message);
+        msg.sendMessage(player,"msg-roll-usage");
     }
 
 }

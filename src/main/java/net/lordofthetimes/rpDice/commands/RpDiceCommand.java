@@ -37,26 +37,7 @@ public class RpDiceCommand {
     private void help(CommandSender sender){
         if(sender instanceof Player player) if(plugin.cooldown.isOnCooldown(player)) return;
 
-        String message = "<gold><bold>———===[ <#FFD54F>RP Dice</#FFD54F> ]===———</bold></gold>\n" +
-                "<yellow><bold>Version: <white>" + plugin.getDescription().getVersion() + "</white></bold></yellow>\n" +
-                "<yellow><bold>By: <white>" + String.join(", ", plugin.getDescription().getAuthors()) + "</white></bold></yellow>\n" +
-                "<yellow><bold>Commands you have permission for:</bold></yellow>\n";
-
-        if(sender.hasPermission("rpdice.reload")){
-            message += "<green><bold>/rpdice reload</bold></green>\n";
-        }
-        if(sender.hasPermission("rpdice.help")){
-            message += "<green><bold>/rpdice help</bold></green>\n";
-        }
-        if(sender.hasPermission("rpdice.roll")){
-            message += "<green><bold>/roll <preset-dice></bold></green>\n";
-        }
-        if(sender.hasPermission("rpdice.roll.custom")){
-            message += "<green><bold>/roll custom <diceName></bold></green>\n";
-        }
-        message += "<gold><bold>————=====================————</bold></gold>";
-
-        MessageSender.sendMessage(sender,message);
+        plugin.msg.sendHelp(sender);
 
     }
 
@@ -64,10 +45,11 @@ public class RpDiceCommand {
         if(sender instanceof Player player) if(plugin.cooldown.isOnCooldown(player)) return;
         try{
             plugin.reload();
-            MessageSender.sendMessage(sender, "<green>Plugin reloaded successfully!</green>");
+            plugin.msg.sendMessage(sender, "msg-reload-success");
         }
         catch (IOException error){
-            MessageSender.sendMessage(sender, "<red>Failed to reload the config! " + error + "</red>");
+            plugin.logger.logError("<red>Failed to reload the config!",error);
+            plugin.msg.sendMessage(sender, "msg-reload-fail");
         }
     }
 }

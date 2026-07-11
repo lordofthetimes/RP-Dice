@@ -1,6 +1,7 @@
 package net.lordofthetimes.rpDice.utils;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
+import net.lordofthetimes.rpDice.RpDice;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -8,10 +9,12 @@ import java.util.UUID;
 
 public class CommandCooldown {
 
-    private YamlDocument config;
+    private final YamlDocument config;
+    private final MessageSender msg;
 
-    public CommandCooldown(YamlDocument config){
-        this.config = config;
+    public CommandCooldown(RpDice plugin){
+        this.config = plugin.config;
+        this.msg = plugin.msg;
     }
 
     private HashMap<UUID, Long> cooldown = new HashMap<UUID, Long>();
@@ -31,7 +34,7 @@ public class CommandCooldown {
         }
 
         if(timeLeft < config.getInt("commandCooldown")){
-            MessageSender.sendCooldown(player,timeLeft);
+            msg.sendCooldown(player,timeLeft);
             return true;
         }
         cooldown.put(player.getUniqueId(),System.currentTimeMillis());

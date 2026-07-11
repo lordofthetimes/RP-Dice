@@ -70,18 +70,18 @@ public class UpdateChecker {
     public void sendVersionPlayer(Player player){
         if(!config.getBoolean("checkForUpdate")) return;
         if(version.contains("experimental")){
-            MessageSender.sendMessage(player,"<red><bold>This version of RP Dice is experimental! Please manually check for updates!</bold></red>");
-            MessageSender.sendMessage(player,"<yellow>Running version<red><bold> " + version + "</bold></red>");
+            plugin.msg.sendMessage(player,"<red><bold>This version of RP Dice is experimental! Please manually check for updates!</bold></red>");
+            plugin.msg.sendMessage(player,"<yellow>Running version<red><bold> " + version + "</bold></red>");
             return;
         }
         if(isNotLatest(version,latestVersion)){
-            MessageSender.sendMessage(player,"<red><bold>Current version of RP Dice is not the latest!</bold></red>");
-            MessageSender.sendMessage(player,"<yellow>Running version<red><bold> " + version + "</bold></red> when latest version is<green><bold> " + latestVersion + "</bold></green></yellow>");
-            MessageSender.sendMessage(player,"<aqua>Changelog:</aqua> " + changelog.replaceAll(
+            plugin.msg.sendMessage(player,"<red><bold>Current version of RP Dice is not the latest!</bold></red>");
+            plugin.msg.sendMessage(player,"<yellow>Running version<red><bold> " + version + "</bold></red> when latest version is<green><bold> " + latestVersion + "</bold></green></yellow>");
+            plugin.msg.sendMessage(player,"<aqua>Changelog:</aqua> " + changelog.replaceAll(
                     "\\[([^]]+)\\]\\(([^\\)]+)\\)",
                     "<click:open_url:'$2'><underlined><blue>$1</blue></underlined></click>"
             ));
-            MessageSender.sendMessage(player,
+            plugin.msg.sendMessage(player,
                     "<green>Download the latest version here: </green>" +
                             "<click:open_url:'https://modrinth.com/plugin/rp-dice/version/" + latestVersion + "'>" +
                             "<underlined><blue>Modrinth</blue></underlined>" +

@@ -1,0 +1,24 @@
+msg-prefix: "<gold><bold>[RP Dice]</bold></gold> "
+
+msg-cooldown: "<red>This command is on cooldown! Please try again in <bold> <%time%> </bold> seconds!</red>"
+
+msg-reload-success: "<green>Plugin reloaded successfully!</green>"
+msg-reload-fail: "<red>Failed to reload the config! Check the console for more info!</red>"
+
+msg-roll-wrong-format: "<red>Wrong format. Correct format is <number>d<number> e.g. 1d20, 3d4, 12d2"
+
+msg-only-player: "<yellow>This command can only be used by a player!</yellow>"
+
+msg-roll-usage: "<yellow>USAGE: \n/roll <preset-dice> - rolls a preset dice from the config\n/roll custom <diceName> - rolls custom dice. Format : <number>d<number> e.g. 1d20, 3d4, 12d2"
+
+msg-custom-limit: "<red>Over the limit. Maximum amount of dices is %diceLimit%> and maximum roll is <%maxLimit%> !</red>"
+
+msg-help-top: "<yellow><bold>Commands you have permission for:</bold></yellow>\n"
+
+msg-help-reload: "<green><bold>/rpdice reload</bold></green>\n"
+msg-help-help: "<green><bold>/rpdice help</bold></green>\n"
+msg-help-roll: "<green><bold>/roll <preset-dice></bold></green>\n"
+msg-help-custom: "<green><bold>/roll custom <diceName></bold></green>\n"
+
+# DO NOT CHANGE MANUALLY
+messages-version: 1

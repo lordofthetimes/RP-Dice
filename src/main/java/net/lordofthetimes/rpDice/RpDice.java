@@ -14,6 +14,7 @@ import net.lordofthetimes.rpDice.hooks.bstats.Metrics;
 import net.lordofthetimes.rpDice.listeners.PlayerJoinListener;
 import net.lordofthetimes.rpDice.utils.CommandCooldown;
 import net.lordofthetimes.rpDice.utils.LogHelper;
+import net.lordofthetimes.rpDice.utils.MessageSender;
 import net.lordofthetimes.rpDice.utils.UpdateChecker;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,7 +24,11 @@ import java.io.IOException;
 public final class RpDice extends JavaPlugin {
 
     public final LogHelper logger = new LogHelper(this.getLogger());
+
     public YamlDocument config;
+    public YamlDocument messages;
+
+    public MessageSender msg;
     public UpdateChecker updateChecker;
     public CommandCooldown cooldown;
 
@@ -65,19 +70,35 @@ public final class RpDice extends JavaPlugin {
                             .build()
             );
             config.save();
+
+            messages = YamlDocument.create(
+                    new File(getDataFolder(), "messages.yml"),
+                    this.getResource("messages.yml"),
+                    GeneralSettings.DEFAULT,
+                    LoaderSettings.DEFAULT,
+                    DumperSettings.DEFAULT,
+                    UpdaterSettings.builder()
+                            .setVersioning(new BasicVersioning("messages-version"))
+                            .setOptionSorting(UpdaterSettings.OptionSorting.SORT_BY_DEFAULTS)
+                            .build()
+            );
+            messages.save();
+
         } catch (Exception e) {
             logger.logError("Failed to load or update config! Plugin is being disabled ",e);
             onDisable();
         }
         logger.logInfo("Config loaded successfully!");
 
-        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null && config.getBoolean("papi.enabled")) {
+
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             getLogger().info("PAPI detected!");
             papiEnabled = true;
         }
 
         updateChecker = new UpdateChecker(this,version);
-        cooldown = new CommandCooldown(config);
+        cooldown = new CommandCooldown(this);
+        msg = new MessageSender(this);
 
         rollCommand = new RollCommand(this);
         rpDiceCommand = new RpDiceCommand(this);
@@ -97,5 +118,6 @@ public final class RpDice extends JavaPlugin {
 
     public void reload() throws IOException {
         config.reload();
+        messages.reload();
     }
 }
