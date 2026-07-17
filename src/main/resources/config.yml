@@ -30,6 +30,27 @@ customMaxDice: 10
 # Max amount that can be rolled for custom roll
 customMax: 100
 
+# Configuration for /roll action <action> command
+action:
+  # Allow for action dice rolls [default - true]
+  enabled: true
+
+  # List of possible results. Can be as long as you want. All have equal chances.
+  # If you want specific result to appear more often, add duplicates
+  results:
+  - "Horrible"
+  - "Bad"
+  - "Neutral"
+  - "Good"
+  - "Perfect"
+
+  # Message showing result of the roll. Placeholders:
+  # <%username%> - players name
+  # <%action%> - action supplied by player
+  # <%result%> - result of the action
+  # Also supports papi placeholders.
+  resultMessage: "<green><%username%> <%action%>! <gray>(<%result%>)</gray></green>"
+
 # Example preset dices
 dices:
   1d6:
@@ -48,4 +69,4 @@ dices:
     max: 7 # Maximum roll possible
 
 # DO NOT CHANGE VERSION - ESSENTIAL FOR CONFIG UPDATES
-config-version: 1
+config-version: 2

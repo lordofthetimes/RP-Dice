@@ -19,6 +19,7 @@ msg-help-reload: "<green><bold>/rpdice reload</bold></green>\n"
 msg-help-help: "<green><bold>/rpdice help</bold></green>\n"
 msg-help-roll: "<green><bold>/roll <preset-dice></bold></green>\n"
 msg-help-custom: "<green><bold>/roll custom <diceName></bold></green>\n"
+msg-help-action: "<green><bold>/roll action <action></bold></green>\n"
 
 # DO NOT CHANGE MANUALLY
-messages-version: 1
+messages-version: 2

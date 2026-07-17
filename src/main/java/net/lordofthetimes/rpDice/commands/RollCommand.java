@@ -3,6 +3,7 @@ package net.lordofthetimes.rpDice.commands;
 import dev.dejvokep.boostedyaml.YamlDocument;
 import dev.dejvokep.boostedyaml.block.implementation.Section;
 import dev.jorel.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.arguments.GreedyStringArgument;
 import dev.jorel.commandapi.arguments.StringArgument;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -55,10 +56,50 @@ public class RollCommand {
                 .executes((sender,args) -> {
                     rollCustom(sender, args.get("diceName").toString());
                 })
+        );
+        rollCommand.withSubcommand(new CommandAPICommand("action")
+                .withPermission("rpdice.roll.action")
+                .withArguments(new GreedyStringArgument("action"))
+                .executes((sender,args) -> {
+                    rollAction(sender, args.get("action").toString());
+                })
         ).register();
     }
 
+    private void rollAction(CommandSender sender, String action){
+        if(!(sender instanceof Player player)){
+            msg.sendMessage(sender,"msg-only-player");
+            return;
+        }
+
+        Random rn = new Random();
+
+        List<String> options = config.getStringList("action.results");
+        String result = options.get(rn.nextInt(options.size() + 1));
+
+        String message = config.getString("action.resultMessage");
+        message = message.replace("<%username%>",player.getName());
+        message = message.replace("<%action%>",action);
+        message = message.replace("<%result%>",result);
+
+        if(plugin.papiEnabled){
+            message = PlaceholderAPI.setPlaceholders(player,message);
+        }
+
+        Bukkit.getServer().getConsoleSender().sendMessage(MiniMessage.miniMessage().deserialize(message));
+        for(Player onlinePlayer : Bukkit.getOnlinePlayers()){
+            if(withinDistance(onlinePlayer,player)){
+                onlinePlayer.sendMessage(MiniMessage.miniMessage().deserialize(message));
+            }
+        }
+    }
+
     private void rollCustom(CommandSender sender, String name){
+
+        if(!(sender instanceof Player player)){
+            msg.sendMessage(sender,"msg-only-player");
+            return;
+        }
 
         if(!name.matches("^\\d+d\\d+$")){
             msg.sendMessage(sender,"msg-roll-wrong-format");

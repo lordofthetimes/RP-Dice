@@ -57,6 +57,9 @@ public class MessageSender {
         if(sender.hasPermission("rpdice.roll.custom")){
             message += messages.getString("msg-help-custom");
         }
+        if(sender.hasPermission("rpdice.roll.action")){
+            message += messages.getString("msg-help-action");
+        }
         message += "<gold><bold>————=====================————</bold></gold>";
 
         sendMessage(sender,message);

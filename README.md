@@ -15,6 +15,7 @@ This plugin was made as an addition for [Character Cards](https://modrinth.com/p
 /rpdice reload - reload plugin (requires rpdice.reload permission) [to load dice presets requires full restart]
 /roll <name> - roll a dice preset in the config (requires rpdice.roll)
 /roll custom <dice> - roll custom diece (e.g. 1d6, 1d20, 3d4) (requires rpdice.roll.custom)
+/roll action <action> - rolls result for specific action (instead of number result, you get text results defined in config)
 ```
 
 ### Permissions
@@ -23,6 +24,7 @@ rpdice (lack of it blocks access to /rpdice command)
 rpdice.reload
 rpdice.roll
 rpdice.roll.custom
+rpdice.roll.action
 rpdice.updateinfo (notifications about newer versions)
 ```
 # DOWNLOAD HERE [Modrinth](https://modrinth.com/plugin/rpdice)
