@@ -1,1 +1,1 @@
-- added /roll action <action> command
+- fix error with /roll action command

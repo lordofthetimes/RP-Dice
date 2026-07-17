@@ -75,7 +75,7 @@ public class RollCommand {
         Random rn = new Random();
 
         List<String> options = config.getStringList("action.results");
-        String result = options.get(rn.nextInt(options.size() + 1));
+        String result = options.get(rn.nextInt(options.size())); // always think instead of copy code or you get index out of bounds like me
 
         String message = config.getString("action.resultMessage");
         message = message.replace("<%username%>",player.getName());
