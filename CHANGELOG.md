@@ -1,1 +1,2 @@
-- fix error with /roll action command
+- update dependencies for 26.3
+- - fix small typo in default messages.yml configuration

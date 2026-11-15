@@ -11,7 +11,7 @@ msg-only-player: "<yellow>This command can only be used by a player!</yellow>"
 
 msg-roll-usage: "<yellow>USAGE: \n/roll <preset-dice> - rolls a preset dice from the config\n/roll custom <diceName> - rolls custom dice. Format : <number>d<number> e.g. 1d20, 3d4, 12d2"
 
-msg-custom-limit: "<red>Over the limit. Maximum amount of dices is %diceLimit%> and maximum roll is <%maxLimit%> !</red>"
+msg-custom-limit: "<red>Over the limit. Maximum amount of dices is <%diceLimit%> and maximum roll is <%maxLimit%> !</red>"
 
 msg-help-top: "<yellow><bold>Commands you have permission for:</bold></yellow>\n"
 
@@ -22,4 +22,4 @@ msg-help-custom: "<green><bold>/roll custom <diceName></bold></green>\n"
 msg-help-action: "<green><bold>/roll action <action></bold></green>\n"
 
 # DO NOT CHANGE MANUALLY
-messages-version: 2
+messages-version: 3

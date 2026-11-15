@@ -80,6 +80,7 @@ jobs:
             1.21.x
             26.1.x
             26.2
+            26.3
 
           changelog: |
             # RP Dice ${{ env.VERSION }}
